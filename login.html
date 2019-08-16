@@ -1,0 +1,115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>无标题文档</title>
+</head>
+<style>
+    .interface {
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+        <img src="http://hd.wallpaperswide.com/thumbs/blue_ocean_aesthetic_background-t2.jpg"
+        width="100%" height="500"  />
+		</div>
+	</div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-sm-4">
+    <img alt = "300*200" src = "http://hd.wallpaperswide.com/thumbs/the_basta_rock_sunrise_4k-t1.jpg" />
+      <h3>冯诺尔曼结构</h3>
+      <p></p>
+      <p>也称普林斯顿结构，是一种将程序指令存储器和数据存储器合并在一起的存储器结构。程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置。</p>
+    </div>
+    <div class="col-sm-4">
+      <img alt="300*200" src="http://hd.wallpaperswide.com/thumbs/beautiful_icelandic_mountains-t1.jpg" />
+      <h3>哈佛结构</h3>
+      <p></p>
+      <p>哈佛结构是一种将程序指令存储和数据存储分开的存储器结构，它的主要特点是将程序和数据存储在不同的存储空间中，进行独立编址。
+
+</p>
+    </div>
+    <div class="col-sm-4">
+    <img alt = "300*200" src="http://hd.wallpaperswide.com/thumbs/catamaran_cruises_blue_tropical_water_aerial_photography-t1.jpg" />
+      <h3>改进型哈佛结构</h3>        
+      <p></p>
+      <p>改进型的哈佛结构具有一条独立的地址总线和一条独立的数据总线，两条总线由程序存储器和数据存储器分时复用，使结构更紧凑。</p>
+    </div>
+  </div>
+<div style="width:100%;text-align:center">
+ 	<div class="row-fluid">
+		<div class="span12">
+		<div class="interface">
+        <a href="login.html"><span>登录</span></a>
+        <a href="register.html"><span>注册</span></a>
+    </div>
+    <form onsubmit="return false" method="post">
+        <div class="interface"><input type="text" placeholder="用户名" required></div>
+        <div class="interface"><input type="password" placeholder="密码" required></div>
+        <div class="interface"><input type="submit" value="登录" onclick="login()"></div>
+    </form>
+    <script>
+        var localDB = openDatabase('localDB', '1.0', 'Test DB', 2 * 1024 * 1024);
+        localDB.transaction(function (ts) {
+            ts.executeSql("SELECT * FROM user", [], function (tx, results) {
+                var len = results.rows.length;
+                if (len <= 0) {
+                    localDB.transaction(function (ts) {
+                        ts.executeSql('CREATE TABLE IF NOT EXISTS user(username,password)')
+                    });
+                }
+            });
+        });
+        function login() {
+            var username = document.getElementsByTagName("input")[0].value;
+            var password = document.getElementsByTagName("input")[1].value;
+            localDB.transaction(function (ts) {
+                ts.executeSql("SELECT * FROM user WHERE username='" + username + "';", [], function (ts, res) {
+                    if (res.rows.length <= 0) {
+                        alert("登录失败，用户未注册");
+                    } else if (password == res.rows[0].password) {
+                        alert("登录成功,三秒后跳转到百度");
+                        setInterval(function () {
+                            location.href = "https://www.baidu.com";
+                        }, 3000);
+                    } else {
+                        alert("登录失败，密码错误");
+                    }
+                });
+            })
+        }
+    </script>
+		</div>
+	</div>
+   </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3></h3>
+      
+      <p>梦想无论怎样模糊，总潜伏在我们心底，使我们的心境永远得不到宁静，直到这些梦想成为事实才止；像种子在地下一样，一定要萌芽滋长，伸出地面来，寻找阳光</p>
+    </div>
+    <div class="col-sm-4">
+      <h3></h3>
+      
+      <p>地位越高，自我评价就越高，自信心多强，能力就有多强。我们总能表现出与环境的和谐平等</p>
+    </div>
+    <div class="col-sm-4">
+      <h3></h3>        
+      <p>畏惧敌人徒然沮丧了自己的勇气，也就是削弱自己的力量，增加敌人的声势，等于让自己的愚蠢攻击自己。畏惧并不能免于一死，战争的结果大不了也不过一死。奋战而死，是以死亡摧毁死亡，畏怯而死，却做了死亡的奴隶</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
